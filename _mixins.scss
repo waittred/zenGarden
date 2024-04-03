@@ -1,0 +1,14 @@
+// Mixins
+@mixin flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin font-size-responsive($size-desktop, $size-mobile) {
+    font-size: $size-desktop;
+    @media (max-width: 768px) {
+      font-size: $size-mobile;
+    }
+  }
+

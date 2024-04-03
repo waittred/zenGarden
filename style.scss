@@ -1,0 +1,463 @@
+@use 'variables' as *;
+@import 'mixins';
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+
+
+// Main Styles
+
+
+body {
+  font-family: $font-family-sans;
+  background-color: $background-color;
+  color: $text-color;
+  position: relative;
+  margin: 0; // Remove the margin.
+}
+
+// Headers
+header {
+  background: linear-gradient($primary-color, lighten($primary-color, 20%));
+  padding: $spacing-medium;
+  // border-radius: $spacing-small;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 4;
+
+  h1, h2 {
+    font-family: $font-family-serif;
+    color: $h1h2-text-color;
+    margin: $spacing-small 0;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); 
+    animation: fadeInDown 1.5s ease-out;
+    position: relative; 
+    z-index: 1; 
+  }
+}
+
+h1 {
+    @include font-size-responsive(3rem, 2rem);
+}
+
+h2 {
+    @include font-size-responsive(2rem, 1.5rem);
+    background: linear-gradient($primary-color, $secondary-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+h3 {
+    background: linear-gradient(to right, $h3-background-color-start, $h3-background-color-end);
+    color: #ffffff; // Keeps the text color white for contrast
+    padding: 10px;
+    border-radius: $spacing-small; // Maintains rounded corners for a soft look
+    box-shadow: 
+      inset 0 0 8px rgba(0, 0, 0, 0.2), // Deepens the inset shadow for more "inner glow"
+      0 4px 6px rgba(0, 0, 0, 0.2), // Adds a soft outer shadow for a lifted effect
+      0 10px 20px rgba(0, 0, 0, 0.1); // Adds a further shadow for added depth and dimension
+  
+    // Enhancing the hover effect for interactive 3D feel
+    &:hover {
+      transform: translateY(-2px); // Slightly raises the element to enhance the 3D effect
+      box-shadow: 
+        inset 0 0 8px rgba(0, 0, 0, 0.3), // Intensifies the inset shadow
+        0 5px 8px rgba(0, 0, 0, 0.25), // Darkens and expands the shadow for a more pronounced lift
+        0 12px 24px rgba(0, 0, 0, 0.15); // Expands and softens the further shadow for greater depth
+    }
+}
+
+.sidebar h3 {
+  color: $h3-text-color; // Retains the specified text color
+  background-color: #f9f9e1; // Optional: Adds a light pale buttery yellow background for contrast and depth
+  padding: 10px;
+  margin: 15px 0; // Adds some space around each h3 for clarity
+  border: none; // Removes the flat border to emphasize the 3D effect
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2), // Slightly darker shadow for depth
+    inset 0 -1px 2px rgba(0, 0, 0, 0.1), // Inner shadow for a subtle inset effect
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), // Lower outer shadow for the "lifted" effect
+    0 4px 6px -2px rgba(0, 0, 0, 0.05); // Soft ambient shadow for added realism
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; // Smooth transitions for hover effects
+
+  &:hover {
+    transform: translateY(-3px); // Lifts the element slightly on hover for an interactive 3D effect
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.25), 
+      inset 0 -2px 3px rgba(0, 0, 0, 0.15), 
+      0 12px 20px -5px rgba(0, 0, 0, 0.15), 
+      0 5px 8px -4px rgba(0, 0, 0, 0.1); // Enhanced shadows on hover for a more pronounced 3D look
+  }
+}
+// Beach Animation
+
+// Move this to the page wrapper so we can place this in the grid. 
+body::before {
+  // content: '';
+  // position: fixed;
+  // top: 171px;
+  // left: 0;
+  // right: 0;
+  // height: 400px;
+  // background-image: url('./images/calm_waters.webp');
+  // background-repeat: repeat-x;
+  // background-size: cover;
+  // border-radius: $spacing-small;
+  // z-index: 2;
+  // animation: wave 30s infinite linear;
+  
+
+}
+
+// I am using inheritance. 
+// We could do an mixin instead if you want.  
+%grid {
+  display: grid;
+  grid-template-rows: 170px 400px 100px 200px 1fr 92px;
+  grid-template-columns: 260px 1fr;
+  column-gap: 15px;
+}
+
+%use-grid {
+  grid-row: 1 / 7;
+  grid-column: 1 / 3;
+}
+
+
+.page-wrapper {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // padding-top: 570px; 
+  // padding-bottom: 0;
+
+  @extend %grid;
+
+
+  &::before {
+    grid-row: 2 / 3;  // Place the image in the grid.
+    grid-column: 1 / 3;
+
+
+    content: '';
+    // position: fixed;
+    // top: 171px;
+    // left: 0;
+    // right: 0;
+    height: 400px;
+    background-image: url('./images/calm_waters.webp');
+    background-repeat: repeat-x;
+    background-size: cover;
+    // border-radius: $spacing-small;
+    z-index: 2;
+    animation: wave 30s infinite linear;
+  }
+
+}
+
+// We are going to do something tricky here. We are going to have the intro take up the whole grid.
+// Then we are going to redefine the grid so we can place the elements inside of the grid. 
+.intro {
+  @extend %grid;
+  @extend %use-grid;
+}
+
+.summary {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.preamble {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+}
+
+.main {
+  grid-column: 2 / 3;
+  grid-row: 5 / 6;
+}
+
+
+.intro, .summary, .preamble, .explanation, .participation, .benefits, .requirements, .zen-intro, .main {
+  
+  // margin: auto;
+  // max-width: 1200px;  
+
+  @media (max-width: 768px) {
+    margin-left: 0; // Remove the left margin on smaller screens
+    padding: $spacing-small; // Add some padding for better readability
+  }
+}
+
+// Sidebar Styles
+.sidebar {
+  grid-row: 3 / 6;  // Place the row and column in the grid. 
+  grid-column: 1 / 2;
+
+  width: 200px;
+  // height: 57%;
+  // position: absolute; // Using the grid to place this.
+  padding: $spacing-large;
+  // left: 0;
+  color: $sidebar-h3-text-color;
+  background: $sidebar-h3-background-color url('./images/vertical-surfboard.webp') no-repeat left 100% / contain;
+  z-index: 1;  
+  color: $sidebar-text-color;
+  a {
+    color: $sidebar-link-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $sidebar-link-hover-color; 
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    position: relative;
+
+    &::before {
+      content: '🐚';
+      display: inline-block;
+      margin-right: 0.5em;
+      transition: transform 0.3s ease;
+      border-radius: 50%;
+    }
+
+    &:hover::before {
+      transform: scale(1.2) rotate(45deg);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  @media (max-width: 768px) {
+    // .display: none; // I would probably not hide this on mobile. 
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 1200px;
+    margin-bottom: 92px;
+  }
+
+  @media screen and (max-width: 600px) {
+    min-height: 1000px;
+  }
+}
+
+
+// Footer Styles
+footer {
+  background: linear-gradient($primary-color, lighten($primary-color, 20%));
+  color: $footer-text-color;
+  position: fixed; // Keep it at the bottom of the viewport
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  overflow: hidden; // Prevents animated elements from overflowing the footer's bounds
+  width: 100%; // Ensure the footer takes up the full width of the screen
+  
+
+  a {
+    color: $footer-text-color;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative; // Added for absolute positioning of the coconut
+
+    &:hover {
+      color: $footer-link-hover-color;
+      transform: scale(1.05);
+
+      // Trigger the coconut drop animation on hover
+      &::after {
+        animation: coconutDrop 3s forwards;
+      }
+    }
+
+    &:nth-child(even)::before {
+      content: '🌴';
+      display: inline-block;
+      font-size: 70px;
+      margin-left: 40px;
+      vertical-align: middle;
+    }
+
+    &:nth-child(odd) {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 60"><defs><linearGradient id="boardGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2377c4d3;" /><stop offset="50%" style="stop-color:%238CC63F;" /><stop offset="100%" style="stop-color:%23ea2e49;" /></linearGradient></defs><path fill="url(%23boardGradient)" d="M12 2c-5 0-9 20-9 28s4 28 9 28 9-20 9-28-4-28-9-28z"/><path d="M12,5 Q14,15 12,25 Q10,35 12,45" stroke="%23000000" stroke-width="2" fill="none"/><circle cx="12" cy="30" r="3" fill="%23f6f792e6" /></svg>');
+      background-repeat: no-repeat;
+      background-size: 30px 80px;
+      background-position: 0 50%;
+      padding-left: 40px;
+      padding-right: 5px;
+      display: inline-block;
+      height: 80px;
+      line-height: 80px;
+      margin-left: 40px;
+      animation: fastSway 1s ease-in-out infinite;
+    }
+
+    &:nth-child(even)::after {
+      content: '🥥'; // Coconut emoji
+      position: absolute;
+      top: 10px; // Adjusted to align with the top of the palm tree
+      right: 50px; // Positioned to the right of the palm tree
+      font-size: 15px; // Size of the coconut emoji
+      opacity: 0; // Start fully transparent
+      z-index: -1; // Ensure the coconut appears behind the palm tree
+    }
+  }
+  a.zen-validate-css, a.zen-accessibility {
+    color: $link-color;
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
+  
+}
+
+// Coconut drop animation keyframes
+@keyframes coconutDrop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80px); // Adjust the drop distance as needed
+    opacity: 0;
+  }
+}
+
+// Keyframes for swaying palm trees
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes fastSway {
+  0%, 100% {
+    transform: rotate(-5deg); // Increase rotation angle for more noticeable movement
+  }
+  50% {
+    transform: rotate(5deg); // Increase rotation angle for more noticeable movement
+  }
+}
+
+
+
+// Animation Keyframes
+@keyframes wave {
+  0% {
+    background-position: 0 100%;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Additional Styles
+img {
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+button:focus, button:active {
+  outline: 3px solid darken($primary-color, 15%);
+  transform: translateY(2px);
+}
+
+// Custom Scrollbars
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+}
+
+@media screen and (max-width: 1090px) {
+  .page-wrapper, .intro {
+    grid-template-rows: 170px 400px 100px 230px 1fr 92px;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .page-wrapper, .intro {
+    grid-template-rows: 170px 400px 100px 280px 1fr 92px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-wrapper, .intro {
+    display: block;
+  }
+
+  .page-wrapper {
+    padding-top: 541px;
+
+    &::before {
+      width: 100%;
+      position: absolute;
+      top: 141px;
+    }
+  }
+
+  footer {
+    margin-left: 0;
+    min-height: 92px;
+  }
+}
+
+@media (max-width: 650px) { // Adjust the breakpoint as needed  
+  footer {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  footer a:nth-child(odd),
+  footer a:nth-child(even)::before,
+  footer a:nth-child(even)::after {
+    // display: none; // Hide emojis and SVGs in the footer
+    background-image: none;
+    content: '';
+    animation: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  body::before {
+    top: .2rem; 
+  }
+}
