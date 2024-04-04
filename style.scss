@@ -93,28 +93,7 @@ h3 {
       0 5px 8px -4px rgba(0, 0, 0, 0.1); // Enhanced shadows on hover for a more pronounced 3D look
   }
 }
-// Beach Animation
-
-// Move this to the page wrapper so we can place this in the grid. 
-body::before {
-  // content: '';
-  // position: fixed;
-  // top: 171px;
-  // left: 0;
-  // right: 0;
-  // height: 400px;
-  // background-image: url('./images/calm_waters.webp');
-  // background-repeat: repeat-x;
-  // background-size: cover;
-  // border-radius: $spacing-small;
-  // z-index: 2;
-  // animation: wave 30s infinite linear;
   
-
-}
-
-// I am using inheritance. 
-// We could do an mixin instead if you want.  
 %grid {
   display: grid;
   grid-template-rows: 170px 400px 100px 200px 1fr 92px;
@@ -129,12 +108,7 @@ body::before {
 
 
 .page-wrapper {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // padding-top: 570px; 
-  // padding-bottom: 0;
-
+  
   @extend %grid;
 
 
@@ -144,15 +118,10 @@ body::before {
 
 
     content: '';
-    // position: fixed;
-    // top: 171px;
-    // left: 0;
-    // right: 0;
     height: 400px;
     background-image: url('./images/calm_waters.webp');
     background-repeat: repeat-x;
     background-size: cover;
-    // border-radius: $spacing-small;
     z-index: 2;
     animation: wave 30s infinite linear;
   }
@@ -182,27 +151,12 @@ body::before {
 }
 
 
-.intro, .summary, .preamble, .explanation, .participation, .benefits, .requirements, .zen-intro, .main {
-  
-  // margin: auto;
-  // max-width: 1200px;  
-
-  @media (max-width: 768px) {
-    margin-left: 0; // Remove the left margin on smaller screens
-    padding: $spacing-small; // Add some padding for better readability
-  }
-}
-
 // Sidebar Styles
 .sidebar {
   grid-row: 3 / 6;  // Place the row and column in the grid. 
   grid-column: 1 / 2;
-
   width: 200px;
-  // height: 57%;
-  // position: absolute; // Using the grid to place this.
   padding: $spacing-large;
-  // left: 0;
   color: $sidebar-h3-text-color;
   background: $sidebar-h3-background-color url('./images/vertical-surfboard.webp') no-repeat left 100% / contain;
   z-index: 1;  
@@ -416,6 +370,12 @@ button:focus, button:active {
 }
 
 @media (max-width: 768px) {
+  
+  .intro, .summary, .preamble, .explanation, .participation, .benefits, .requirements, .zen-intro, .main {
+      margin-left: 0; // Remove the left margin on smaller screens
+      padding: $spacing-small; // Add some padding for better readability
+    }  
+  
   .page-wrapper, .intro {
     display: block;
   }

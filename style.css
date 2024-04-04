@@ -115,13 +115,6 @@ h3:hover {
   grid-row: 5/6;
 }
 
-@media (max-width: 768px) {
-  .intro, .summary, .preamble, .explanation, .participation, .benefits, .requirements, .zen-intro, .main {
-    margin-left: 0;
-    padding: 10px;
-  }
-}
-
 .sidebar {
   grid-row: 3/6;
   grid-column: 1/2;
@@ -311,6 +304,10 @@ button:focus, button:active {
   }
 }
 @media (max-width: 768px) {
+  .intro, .summary, .preamble, .explanation, .participation, .benefits, .requirements, .zen-intro, .main {
+    margin-left: 0;
+    padding: 10px;
+  }
   .page-wrapper, .intro {
     display: block;
   }
