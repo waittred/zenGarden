@@ -3,24 +3,20 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
-
-
 // Main Styles
-
 
 body {
   font-family: $font-family-sans;
   background-color: $background-color;
   color: $text-color;
   position: relative;
-  margin: 0; // Remove the margin.
+  margin: 0; 
 }
 
 // Headers
 header {
   background: linear-gradient($primary-color, lighten($primary-color, 20%));
   padding: $spacing-medium;
-  // border-radius: $spacing-small;
   position: fixed;
   top: 0;
   left: 0;
@@ -33,7 +29,7 @@ header {
     color: $h1h2-text-color;
     margin: $spacing-small 0;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); 
-    animation: fadeInDown 1.5s ease-out;
+    animation: fadeInDown 2s ease-out;
     position: relative; 
     z-index: 1; 
   }
@@ -49,7 +45,7 @@ h2 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
+}
 
 h3 {
     background: linear-gradient(to right, $h3-background-color-start, $h3-background-color-end);
@@ -106,7 +102,6 @@ h3 {
   grid-column: 1 / 3;
 }
 
-
 .page-wrapper {
   
   @extend %grid;
@@ -128,8 +123,6 @@ h3 {
 
 }
 
-// We are going to do something tricky here. We are going to have the intro take up the whole grid.
-// Then we are going to redefine the grid so we can place the elements inside of the grid. 
 .intro {
   @extend %grid;
   @extend %use-grid;
@@ -150,7 +143,6 @@ h3 {
   grid-row: 5 / 6;
 }
 
-
 // Sidebar Styles
 .sidebar {
   grid-row: 3 / 6;  // Place the row and column in the grid. 
@@ -158,7 +150,7 @@ h3 {
   width: 200px;
   padding: $spacing-large;
   color: $sidebar-h3-text-color;
-  background: $sidebar-h3-background-color url('./images/vertical-surfboard.webp') no-repeat left 100% / contain;
+  background: $sidebar-h3-background-color url('./images/vertical-surfboard.webp') no-repeat center 100% / contain;
   z-index: 1;  
   color: $sidebar-text-color;
   a {
@@ -192,8 +184,7 @@ h3 {
     }
   }
 
-  @media (max-width: 768px) {
-    // .display: none; // I would probably not hide this on mobile. 
+  @media (max-width: 768px) { 
     width: 100%;
     box-sizing: border-box;
     min-height: 1200px;
@@ -219,7 +210,6 @@ footer {
   overflow: hidden; // Prevents animated elements from overflowing the footer's bounds
   width: 100%; // Ensure the footer takes up the full width of the screen
   
-
   a {
     color: $footer-text-color;
     text-decoration: none;
@@ -307,8 +297,6 @@ footer {
   }
 }
 
-
-
 // Animation Keyframes
 @keyframes wave {
   0% {
@@ -357,6 +345,8 @@ button:focus, button:active {
   background: $primary-color;
 }
 
+//Media Queries
+
 @media screen and (max-width: 1090px) {
   .page-wrapper, .intro {
     grid-template-rows: 170px 400px 100px 230px 1fr 92px;
@@ -369,7 +359,7 @@ button:focus, button:active {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 736px) {
   
   .intro, .summary, .preamble, .explanation, .participation, .benefits, .requirements, .zen-intro, .main {
       margin-left: 0; // Remove the left margin on smaller screens
@@ -390,13 +380,17 @@ button:focus, button:active {
     }
   }
 
+  .sidebar {
+    background-size: 100% auto;
+  }
+
   footer {
     margin-left: 0;
     min-height: 92px;
   }
 }
 
-@media (max-width: 650px) { // Adjust the breakpoint as needed  
+@media (max-width: 648px) { // Adjust the breakpoint as needed  
   footer {
     display: flex;
     align-items: center;
@@ -409,7 +403,6 @@ button:focus, button:active {
   footer a:nth-child(odd),
   footer a:nth-child(even)::before,
   footer a:nth-child(even)::after {
-    // display: none; // Hide emojis and SVGs in the footer
     background-image: none;
     content: '';
     animation: none;
@@ -419,5 +412,11 @@ button:focus, button:active {
 
   body::before {
     top: .2rem; 
+  }
+
+@media (max-width: 480px) {
+  .sidebar {  
+    background-size: 100% auto; // Adjust the background size for small screens
+    }
   }
 }
